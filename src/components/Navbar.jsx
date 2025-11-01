@@ -2,37 +2,44 @@ import React, { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../App";
 import { Storage } from "../services/storageService";
+import logo from "../assets/logo.png";
 
-export default function Navbar(){
+export default function Navbar() {
   const { user, setUser } = useContext(AuthContext);
-  const nav = useNavigate();
+  const navigate = useNavigate();
 
   const logout = () => {
     Storage.logout();
     setUser(null);
-    nav("/login");
+    navigate("/login");
   };
 
   return (
-    <header className="site-header">
-      <div className="brand">Santa Helena</div>
-      <nav>
+    <aside className="sidebar">
+      <div className="sidebar-top">
+        <img src={logo} alt="Santa Helena" className="sidebar-logo" />
+      </div>
+
+      <nav className="sidebar-nav">
         {user ? (
           <>
-            <Link to="/dashboard">Menu Principal</Link>
-            <Link to="/reservations">Reservar</Link>
-            <Link to="/visits">Visitas</Link>
-            <Link to="/payments">Gastos</Link>
-            <button onClick={logout}>Cerrar sesión</button>
+            <Link to="/dashboard" className="nav-link">Inicio</Link>
+            <Link to="/reservations" className="nav-link">Reservar</Link>
+            <Link to="/visits" className="nav-link">Visitas</Link>
+            <Link to="/payments" className="nav-link">Gastos</Link>
+            <button onClick={logout} className="nav-link logout-button">Cerrar sesión</button>
           </>
         ) : (
           <>
-            <Link to="/login">Iniciar Sesión</Link>
-            <Link to="/register">Registrarse</Link>
-            <Link to="/about">Quienes Somos</Link>
+            <Link to="/login" className="nav-link">Iniciar sesión</Link>
+            <Link to="/register" className="nav-link">Registrarse</Link>
           </>
         )}
       </nav>
-    </header>
+
+      <div className="sidebar-footer">
+        <small>© {new Date().getFullYear()} Santa Helena</small>
+      </div>
+    </aside>
   );
 }

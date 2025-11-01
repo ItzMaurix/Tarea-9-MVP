@@ -3,37 +3,45 @@ import { useNavigate, Link } from "react-router-dom";
 import { AuthContext } from "../App";
 import { Storage } from "../services/storageService";
 
-export default function Login(){
+export default function Login() {
   const [email, setEmail] = useState("usuario@example.com");
   const [password, setPassword] = useState("");
   const { setUser } = useContext(AuthContext);
-  const nav = useNavigate();
+  const navigate = useNavigate();
 
   const handleLogin = (e) => {
     e.preventDefault();
     const user = Storage.login(email, password);
-    if(user){
+    if (user) {
       Storage.setCurrentUser(user);
       setUser(user);
-      nav("/dashboard");
+      navigate("/dashboard");
     } else {
-      alert("Credenciales inválidas. (usa usuario@example.com / 123456 como ejemplo)");
+      alert("Credenciales inválidas.");
     }
   };
 
   return (
-    <div className="auth-page">
-      <h2>Iniciar Sesión</h2>
-      <form onSubmit={handleLogin}>
-        <label>Correo Electrónico
-          <input value={email} onChange={e=>setEmail(e.target.value)} type="email" />
-        </label>
-        <label>Contraseña
-          <input value={password} onChange={e=>setPassword(e.target.value)} type="password" />
-        </label>
-        <button type="submit">Ingresar</button>
-      </form>
-      <p>¿No tienes cuenta? <Link to="/register">Registrarse</Link></p>
+    <div className="login-page">
+      <div className="login-card">
+        <h1 className="login-title">Bienvenid@ a</h1>
+        <img src="/src/assets/logo.png" alt="Santa Helena" className="login-logo" />
+        <p className="login-subtitle">Inicia sesión para continuar</p>
+
+        <form onSubmit={handleLogin} className="login-form">
+          <label className="field-label">Correo electrónico
+            <input className="field-input" type="email" value={email} onChange={e => setEmail(e.target.value)} />
+          </label>
+
+          <label className="field-label">Contraseña
+            <input className="field-input" type="password" value={password} onChange={e => setPassword(e.target.value)} />
+          </label>
+
+          <button className="primary-btn" type="submit">Ingresar</button>
+        </form>
+
+        <p className="login-footer">¿No tienes cuenta? <Link to="/register">Registrarse</Link></p>
+      </div>
     </div>
   );
 }

@@ -22,17 +22,18 @@ export default function App() {
   return (
     <AuthContext.Provider value={{ user, setUser }}>
       <Navbar />
+      <TopBar />
       <main className="app-container">
-        <Routes>
-          <Route path="/" element={user ? <Navigate to="/dashboard" /> : <Navigate to="/login" />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/dashboard" element={user ? <Dashboard /> : <Navigate to="/login" />} />
-          <Route path="/reservations" element={user ? <Reservations /> : <Navigate to="/login" />} />
-          <Route path="/visits" element={user ? <VisitForm /> : <Navigate to="/login" />} />
-          <Route path="/payments" element={user ? <Payments /> : <Navigate to="/login" />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+          <Routes>
+            <Route path="/" element={user ? <Navigate to="/dashboard" /> : <Navigate to="/login" />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/dashboard" element={user ? <Dashboard /> : <Navigate to="/login" />} />
+            <Route path="/reservations" element={user ? <Reservations /> : <Navigate to="/login" />} />
+            <Route path="/visits" element={user ? <VisitForm /> : <Navigate to="/login" />} />
+            <Route path="/payments" element={user ? <Payments /> : <Navigate to="/login" />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
       </main>
     </AuthContext.Provider>
   );
