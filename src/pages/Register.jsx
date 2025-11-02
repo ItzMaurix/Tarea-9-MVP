@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Storage } from "../services/storageService";
 import { useNavigate, Link } from "react-router-dom";
+import logo from "../assets/logo1.png";
 
 export default function Register(){
   const [name,setName]=useState("");
@@ -19,7 +20,7 @@ export default function Register(){
     <div className="login-page">
       <div className="login-card">
         <h1 className="login-title">Bienvenid@ a</h1>
-        <img src="/src/assets/logo.png" alt="Santa Helena" className="login-logo" />
+        <img src={logo} alt="Santa Helena" className="login-logo" />
         <p className="login-subtitle">Crea tu cuenta para comenzar</p>
 
         <form onSubmit={handleRegister} className="login-form">

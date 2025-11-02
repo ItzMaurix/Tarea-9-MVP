@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { AuthContext } from "../App";
 import { Storage } from "../services/storageService";
+import logo from "../assets/logo1.png"; // Importación directa
 
 export default function Login() {
   const [email, setEmail] = useState("usuario@example.com");
@@ -25,7 +26,7 @@ export default function Login() {
     <div className="login-page">
       <div className="login-card">
         <h1 className="login-title">Bienvenid@ a</h1>
-        <img src="/src/assets/logo.png" alt="Santa Helena" className="login-logo" />
+        <img src={logo} alt="Santa Helena" className="login-logo" />
         <p className="login-subtitle">Inicia sesión para continuar</p>
 
         <form onSubmit={handleLogin} className="login-form">
