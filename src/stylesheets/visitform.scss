@@ -1,0 +1,185 @@
+:root{
+  /* Harmonized with repository colors */
+  --primary-blue: #0b6173;   
+  --accent-cyan: #0DA673;    
+  --accent-cyan-ghost: rgba(19,209,232,0.08);
+  --button-hover: #084d56;   /* darker blue for CTA hover */
+  --required-color: #dc2626;
+  --text: #111827;
+  --desc: #2d3132;
+  --muted: #8a8a8a;
+  --radius: 12px;
+  --container-max: 980px;
+}
+
+/* Overall container */
+.visit-container{
+  max-width: var(--container-max);
+  margin: 36px auto;
+  padding: 12px 20px;
+  color: var(--text);
+  font-family: "Outfit", "Segoe UI", sans-serif;
+  background: #fff;
+}
+
+/* Title */
+.vf-title{
+  font-size: 1.85rem;
+  font-weight: 600;
+  margin: 6px 0 28px 6px;
+}
+
+/* Descripción del formulario */
+.vf-description{
+  color: var(--desc);
+  font-size: 1rem;
+  margin: -10px 0 24px 6px;
+  line-height: 1.4;
+  max-width: 600px;
+}
+
+/* Form layout: left column (fields) + vertical divider + right column (date + CTA) */
+.vf-form{
+  display: flex;
+  align-items: flex-start;
+  gap: 28px;
+}
+
+/* Left column */
+.vf-left{
+  flex: 1 1 60%;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* Divider */
+.vf-divider{
+  width: 2px;
+  background: rgba(0,0,0,0.85);
+  border-radius: 2px;
+  align-self: stretch;
+  margin-top: 6px;
+  margin-bottom: 6px;
+}
+
+/* Right column */
+.vf-right{
+  flex: 0 0 320px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Label styles */
+.vf-label{
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text);
+  position: relative; // para posicionamiento si es necesario
+}
+
+.vf-label-text{
+  display: inline-block;
+}
+
+.vf-required{
+  color: var(--required-color, #dc2626);
+  margin-left: 2px;
+  font-weight: 700;
+}
+
+/* Inputs (rounded cyan border) */
+.vf-input{
+  padding: 12px 16px;
+  border-radius: var(--radius);
+  border: 3px solid var(--accent-cyan);
+  outline: none;
+  font-size: 1rem;
+  color: var(--text);
+  background: #fff;
+  box-shadow: 0 6px 18px var(--accent-cyan-ghost);
+  transition: box-shadow .16s ease, transform .08s ease, border-color .12s;
+}
+
+/* Subtle inner white border for crispness */
+.vf-input:not(:focus){
+  box-shadow: inset 0 0 0 2px rgba(255,255,255,0.65), 0 6px 18px var(--accent-cyan-ghost);
+}
+
+/* Date input specifics: keep native picker but match sizing */
+.vf-date{
+  min-height: 48px;
+  padding-right: 12px; /* ensure room for picker icon */
+}
+
+/* Make date input appearance consistent across browsers where possible */
+.vf-date::-webkit-calendar-picker-indicator{
+  cursor: pointer;
+  filter: none;
+  opacity: 0.95;
+}
+
+/* Placeholder-like hint underneath date (since native date inputs don't accept placeholders consistently) */
+.vf-hint{
+  display: block;
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 0.95rem;
+  font-weight: 500;
+  line-height: 1;
+}
+
+/* Hide the hint when a date is selected */
+.vf-hint[aria-hidden="true"]{
+  display: none;
+}
+
+/* Placeholder color for text inputs */
+.vf-input::placeholder{
+  color: #9aa8ad;
+}
+
+/* Focus state */
+.vf-input:focus{
+  border-color: var(--primary-blue);
+  box-shadow: 0 10px 26px rgba(11,77,168,0.12);
+  transform: translateY(-1px);
+}
+
+/* CTA button (large deep-blue rounded) */
+.vf-cta{
+  background: var(--primary-blue);
+  color: #fff;
+  padding: 14px 22px;
+  border-radius: 12px;
+  border: none;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  width: 220px;
+  margin-top: 8px;
+  box-shadow: 0 8px 18px rgba(11,77,168,0.18);
+  transition: transform .12s ease, box-shadow .12s ease, background .12s;
+}
+.vf-cta:hover{
+  background: var(--button-hover);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(8,58,128,0.26);
+}
+
+/* Small screens: stacked layout */
+@media (max-width: 820px){
+  .vf-form{
+    flex-direction: column;
+  }
+  .vf-divider{ display: none; }
+  .vf-right{ width: 100%; }
+  .vf-cta{ width: 100%; }
+}
+
+/* Make sure labels and spacing look good on small fonts */
+.vf-label, .vf-input, .vf-cta { line-height: 1.1; }

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Storage } from "../services/storageService";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 export default function Register(){
   const [name,setName]=useState("");
@@ -16,20 +16,30 @@ export default function Register(){
   };
 
   return (
-    <div className="auth-page">
-      <h2>Registrarse</h2>
-      <form onSubmit={handleRegister}>
-        <label>Nombre
-          <input value={name} onChange={e=>setName(e.target.value)} />
-        </label>
-        <label>Correo
-          <input value={email} onChange={e=>setEmail(e.target.value)} type="email" />
-        </label>
-        <label>Contraseña
-          <input value={password} onChange={e=>setPassword(e.target.value)} type="password" />
-        </label>
-        <button type="submit">Registrarse</button>
-      </form>
+    <div className="login-page">
+      <div className="login-card">
+        <h1 className="login-title">Bienvenid@ a</h1>
+        <img src="/src/assets/logo.png" alt="Santa Helena" className="login-logo" />
+        <p className="login-subtitle">Crea tu cuenta para comenzar</p>
+
+        <form onSubmit={handleRegister} className="login-form">
+          <label className="field-label">Nombre
+            <input className="field-input" value={name} onChange={e=>setName(e.target.value)} />
+          </label>
+
+          <label className="field-label">Correo electrónico
+            <input className="field-input" value={email} onChange={e=>setEmail(e.target.value)} type="email" />
+          </label>
+
+          <label className="field-label">Contraseña
+            <input className="field-input" value={password} onChange={e=>setPassword(e.target.value)} type="password" />
+          </label>
+
+          <button className="primary-btn" type="submit">Registrarse</button>
+        </form>
+
+        <p className="login-footer">¿Ya tienes cuenta? <Link to="/login">Ingresar</Link></p>
+      </div>
     </div>
   );
 }
