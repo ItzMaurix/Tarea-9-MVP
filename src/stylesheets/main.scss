@@ -14,6 +14,7 @@
   --primary-color: #0b6173;
   --primary-dark: #084d56;
   --secondary-color: #f0f6f8;
+  --accent: #0DA673;
   --text-color: #222;
   --sidebar-width: 230px;
   --transition: all 0.2s ease;
@@ -388,4 +389,210 @@ h1, h2, h3 {
   }
   .app-container { padding-top: calc(72px + 16px); margin-left: 0; }
   .user-meta { align-items: flex-start; }
+}
+
+
+/* ===========================================================
+   Dashboard Styles
+   =========================================================== */
+
+.dashboard {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.dashboard-header {
+  margin-bottom: 32px;
+}
+
+.dashboard-header h1 {
+  font-size: 2.2rem;
+  color: var(--primary-color);
+  margin: 0;
+}
+
+.dashboard-content {
+  display: grid;
+  grid-template-columns: 1fr 350px;
+  gap: 32px;
+  align-items: start;
+}
+
+/* Columna izquierda - Noticias */
+.dashboard-left {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.section-header h2 {
+  font-size: 1.5rem;
+  color: var(--primary-color);
+  margin-bottom: 16px;
+}
+
+.news-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.news-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 4px 12px rgba(11, 97, 115, 0.08);
+  border: 1px solid #eef3f5;
+  transition: var(--transition);
+}
+
+.news-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(11, 97, 115, 0.12);
+}
+
+.news-content h3 {
+  font-size: 1.2rem;
+  color: var(--primary-color);
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+
+.news-content p {
+  color: #666;
+  line-height: 1.5;
+  margin-bottom: 16px;
+}
+
+.news-button {
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.news-button:hover {
+  background: var(--primary-dark);
+  transform: translateY(-1px);
+}
+
+/* Columna derecha - Contacto y Gastos */
+.dashboard-right {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.contact-card,
+.payments-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 4px 12px rgba(11, 97, 115, 0.08);
+  border: 1px solid #eef3f5;
+}
+
+.contact-card h3,
+.payments-card h3 {
+  font-size: 1.2rem;
+  color: var(--primary-color);
+  margin-bottom: 16px;
+  font-weight: 600;
+}
+
+.contact-info {
+  color: #666;
+  margin-bottom: 20px;
+  line-height: 1.4;
+}
+
+.contact-info:last-child {
+  margin-bottom: 0;
+}
+
+/* Lista de pagos */
+.payments-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.payments-list li {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px 0;
+  border-bottom: 1px solid #eef3f5;
+}
+
+.payments-list li:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.payments-list span {
+  color: #666;
+  font-size: 0.95rem;
+}
+
+.payments-list strong {
+  color: var(--primary-color);
+  font-size: 1.1rem;
+}
+
+.detail-button,
+.pay-button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  font-size: 0.9rem;
+}
+
+.detail-button {
+  background: #f0f6f8;
+  color: var(--primary-color);
+}
+
+.detail-button:hover {
+  background: #e6f4f6;
+}
+
+.pay-button {
+  background: var(--accent);
+  color: white;
+}
+
+.pay-button:hover {
+  background: #0b8c5a;
+  transform: translateY(-1px);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .dashboard-content {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  
+  .dashboard-right {
+    order: -1;
+  }
+  
+  .dashboard-header h1 {
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .payments-list li {
+    flex-direction: column;
+    gap: 12px;
+  }
 }
