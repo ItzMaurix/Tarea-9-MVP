@@ -1,9 +1,15 @@
-import React from "react";
+import React, { useState, useCallback } from "react";
 import { Storage } from "../services/storageService";
 
-export default function Dashboard(){
-  const news = Storage.getNews();
+export default function Dashboard() {
+  const news = Storage.getNews() || [];
   const user = Storage.getCurrentUser();
+
+  const [expandedId, setExpandedId] = useState(null);
+
+  const toggleExpand = useCallback((id) => {
+    setExpandedId(prev => (prev === id ? null : id));
+  }, []);
 
   return (
     <div className="dashboard">
@@ -17,17 +23,61 @@ export default function Dashboard(){
           <div className="section-header">
             <h2>Noticias relevantes</h2>
           </div>
-          
+
           <div className="news-grid">
-            {news.map(n => (
-              <article key={n.id} className="news-card">
-                <div className="news-content">
-                  <h3>{n.title}</h3>
-                  <p>{n.excerpt}</p>
-                  <button className="news-button">Ver más</button>
-                </div>
-              </article>
-            ))}
+            {news.length === 0 && (
+              <p>No hay noticias disponibles en este momento.</p>
+            )}
+
+            {news.map(n => {
+              const isExpanded = expandedId === n.id;
+              return (
+                <article
+                  key={n.id}
+                  className={`news-card ${isExpanded ? "expanded" : ""}`}
+                  aria-expanded={isExpanded}
+                >
+                  <div className="news-content">
+                    <h3>{n.title}</h3>
+
+                    {/* Mostrar excerpt o contenido completo según el estado */}
+                    {!isExpanded ? (
+                      <p className="news-excerpt">{n.excerpt}</p>
+                    ) : (
+                      <div className="news-full">
+                        {/* n.content debe existir en los datos de Storage.getNews() */}
+                        <p>{n.content}</p>
+                      </div>
+                    )}
+
+                    <button
+                      className="news-button"
+                      onClick={() => toggleExpand(n.id)}
+                      aria-controls={`news-details-${n.id}`}
+                      aria-expanded={isExpanded}
+                    >
+                      {isExpanded ? "Mostrar menos" : "Ver más"}
+                    </button>
+                  </div>
+
+                  {/* Zona opcional para detalles accesibles */}
+                  {isExpanded && (
+                    <div
+                      id={`news-details-${n.id}`}
+                      className="news-details"
+                      role="region"
+                      aria-labelledby={`news-title-${n.id}`}
+                      style={{ marginTop: 8 }}
+                    >
+                      {/* Ya mostramos el contenido arriba; este bloque puede usarse para metadatos */}
+                      {n.publishedAt && (
+                        <small>Publicado: {new Date(n.publishedAt).toLocaleString()}</small>
+                      )}
+                    </div>
+                  )}
+                </article>
+              );
+            })}
           </div>
         </section>
 
@@ -36,26 +86,9 @@ export default function Dashboard(){
           <div className="contact-card">
             <h3>Fono de contacto</h3>
             <p className="contact-info">999-999-999-9</p>
-            
-            <h3>¿Tienes algún problema?</h3>
-            <p className="contact-info">contactanos: contacto@example.com</p>
-          </div>
 
-          {/* Sección de gastos comunes (opcional, puedes quitarla si no la necesitas) */}
-          <div className="payments-card">
-            <h3>Gastos comunes</h3>
-            <ul className="payments-list">
-              <li>
-                <span>Servicio de agua</span>
-                <strong>15000$</strong>
-                <button className="detail-button">Ver detalle</button>
-              </li>
-              <li>
-                <span>Gastos comunes pendientes</span>
-                <strong>35000$</strong>
-                <button className="pay-button">Pagar</button>
-              </li>
-            </ul>
+            <h3>¿Tienes algún problema?</h3>
+            <p className="contact-info">contáctanos: contacto@example.com</p>
           </div>
         </section>
       </div>
