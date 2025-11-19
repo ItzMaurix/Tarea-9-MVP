@@ -11,7 +11,7 @@ import defaultAvatar from "../assets/avatar.png"; // opcional: coloca avatar.png
 const titleMap = {
   "/dashboard": "Menú Principal",
   "/reservations": "Reservas",
-  "/visits": "Registro de visitas",
+  "/visits": "Gestión de visitas",
   "/payments": "Gastos comunes",
   "/login": "Iniciar sesión",
   "/register": "Registro",
