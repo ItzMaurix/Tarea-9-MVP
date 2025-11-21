@@ -203,7 +203,7 @@ export default function Reservations() {
         </div>
       )}
 
-      {/* Simplified Spaces Grid */}
+      {/* Simplified Spaces Grid with Images */}
       <div style={{ 
         display: "grid", 
         gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", 
@@ -216,61 +216,75 @@ export default function Reservations() {
             style={{
               border: "1px solid #e0e0e0",
               borderRadius: 8,
-              padding: 24,
+              padding: 0,
               background: "white",
-              boxShadow: "0 2px 4px rgba(0,0,0,0.05)"
+              boxShadow: "0 2px 4px rgba(0,0,0,0.05)",
+              overflow: "hidden"
             }}
           >
-            <h2 style={{ 
-              margin: "0 0 16px 0", 
-              fontSize: "1.4rem", 
-              fontWeight: "bold",
-              color: "#333"
-            }}>
-              {space.title}
-            </h2>
-            
-            <div style={{ marginBottom: 20 }}>
-              <div style={{ 
-                fontSize: "0.95rem", 
-                color: "#666",
-                marginBottom: 4
-              }}>
-                Capacidad: máximo {space.capacity} personas
-              </div>
-              <div style={{ 
-                fontSize: "0.95rem", 
-                color: "#666"
-              }}>
-                Tiempo de reserva: {space.time}
-              </div>
+            {}
+            <div
+              style={{
+    width: "100%",
+    height: "160px",
+    background: `url(${space.image}) center/cover no-repeat`,
+    borderBottom: "1px solid #e0e0e0"
+  }}
+            >
             </div>
 
-            <hr style={{ 
-              border: "none", 
-              borderTop: "1px solid #e0e0e0", 
-              margin: "20px 0" 
-            }} />
+            <div style={{ padding: 24 }}>
+              <h2 style={{ 
+                margin: "0 0 16px 0", 
+                fontSize: "1.4rem", 
+                fontWeight: "bold",
+                color: "#333"
+              }}>
+                {space.title}
+              </h2>
+              
+              <div style={{ marginBottom: 20 }}>
+                <div style={{ 
+                  fontSize: "0.95rem", 
+                  color: "#666",
+                  marginBottom: 4
+                }}>
+                  Capacidad: máximo {space.capacity} personas
+                </div>
+                <div style={{ 
+                  fontSize: "0.95rem", 
+                  color: "#666"
+                }}>
+                  Tiempo de reserva: {space.time}
+                </div>
+              </div>
 
-            <button
-              onClick={() => onSelectSpace(space)}
-              style={{
-                width: "100%",
-                padding: "12px 16px",
-                background: "#3b82f6",
-                color: "white",
-                border: "none",
-                borderRadius: 6,
-                cursor: "pointer",
-                fontSize: "1rem",
-                fontWeight: "600",
-                transition: "background-color 0.2s"
-              }}
-              onMouseOver={(e) => e.target.style.background = "#2563eb"}
-              onMouseOut={(e) => e.target.style.background = "#3b82f6"}
-            >
-              Reservar
-            </button>
+              <hr style={{ 
+                border: "none", 
+                borderTop: "1px solid #e0e0e0", 
+                margin: "20px 0" 
+              }} />
+
+              <button
+                onClick={() => onSelectSpace(space)}
+                style={{
+                  width: "100%",
+                  padding: "12px 16px",
+                  background: "#3b82f6",
+                  color: "white",
+                  border: "none",
+                  borderRadius: 6,
+                  cursor: "pointer",
+                  fontSize: "1rem",
+                  fontWeight: "600",
+                  transition: "background-color 0.2s"
+                }}
+                onMouseOver={(e) => e.target.style.background = "#2563eb"}
+                onMouseOut={(e) => e.target.style.background = "#3b82f6"}
+              >
+                Reservar
+              </button>
+            </div>
           </div>
         ))}
       </div>
