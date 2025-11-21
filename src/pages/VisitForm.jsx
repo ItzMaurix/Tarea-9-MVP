@@ -116,7 +116,7 @@ export default function Visits() {
             ← Volver al menú
           </button>
           <h1 className="vf-title">Registrar Nueva Visita</h1>
-          <p className="vf-description">Complete los siguientes datos para registrar la visita. Todos los campos son obligatorios.</p>
+          <p className="vf-description">Complete los siguientes datos para registrar la visita. Los campos marcados con asterisco (*) son obligatorios.</p>
         </div>
 
         <form className="vf-form" onSubmit={submit}>
